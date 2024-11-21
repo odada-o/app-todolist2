@@ -33,7 +33,7 @@ const Todo = () => {
             <button>삭제</button>
           </li>
         </ul>
-
+      </div>
     </div>
   )
 }
