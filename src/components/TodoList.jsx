@@ -8,7 +8,7 @@ const TodoList = ({ mockTodoData }) => {
         <ul>
           {mockTodoData.map((item) => (
             console.log(item),
-            <TodoItem key={item.id} isDone={item.isDone} task={item.task} createDate={item.createDate} />
+            <TodoItem key={item.id} {...item} />
           )
         )}
           
