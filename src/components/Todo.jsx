@@ -12,9 +12,9 @@ const mockTodoData = [
   },
   {
     id: 2,
-    isDone: false,
+    isDone: true,
     task: '감자, 맛동산 캐기',
-    createDate: '2024.04.22'
+    createDate: '2024.04.21'
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const Todo = () => {
     <div>
       <TodoHd />
       <TodoEditor />
-      <TodoList />
+      <TodoList mockTodoData={mockTodoData} />
     </div>
   )
 }
