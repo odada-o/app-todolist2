@@ -7,20 +7,24 @@ import TodoList from './TodoList'
 import { mockTodoData } from '@/data/todoData'
 
 const Todo = () => {
-  const [todos, setTodos] = useState(mockTodoData)
+  const [todos, setTodos] = useState([]);
 
   // 마운트 시 
+  // 1. 초기 데이터 로드
   useEffect(() => {
-    // 로컬스토리지에서 데이터를 가져와서 
-    const savedTodos = JSON.parse(localStorage.getItem('todos')) || []
-    // todos 상태에 저장
-    setTodos(savedTodos)
-  }, [])
+      // localStorage에서 'todos' 키로 저장된 데이터를 가져옴
+      // JSON.parse() 함수를 이용하여 문자열을 객체로 변환
+      const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+      // 가져온 데이터로 상태 업데이트
+      setTodos(savedTodos);
+  }, []) // 빈 배열: 컴포넌트가 처음 마운트될 때만 실행
 
-  // todos 업데이트 시
+  // 2. 데이터 자동 저장
   useEffect(() => {
-    // 로컬스토리지에 데이터를 저장
-  }, [todos])
+      // todos 상태가 변경될 때마다 localStorage에 저장
+      // JSON.stringify() 함수를 이용하여 객체를 문자열로 변환
+      localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]) // todos가 변경될 때마다 실행
   
 
   const addTodo = (task) => {
