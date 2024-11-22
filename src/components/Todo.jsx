@@ -20,11 +20,14 @@ const Todo = () => {
     setTodos([newTodo, ...todos])
   }
 
+  // 완료 표시 함수
+  const onUpdate = () => {}
+
   return (
     <div className='flex flex-col gap-4 p-8'>
       <TodoHd />
       <TodoEditor addTodo={addTodo} />
-      <TodoList mockTodoData={todos} />
+      <TodoList mockTodoData={todos} onUpdate={onUpdate} />
     </div>
   )
 }

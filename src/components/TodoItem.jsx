@@ -1,9 +1,13 @@
 import React from 'react'
 
-const TodoItem = ({ task, isDone, createDate }) => {
+const TodoItem = ({id, task, isDone, createDate, onUpdate }) => {
   return (
-    <li>
-      <input type="checkbox" checked={isDone} />
+    <li key={id}>
+      <input 
+        type="checkbox" 
+        checked={isDone} 
+        onChange={() => {onUpdate(id)}} 
+      />
       <strong>{task}</strong>
       <span>{createDate}</span>
       <button>삭제</button>
