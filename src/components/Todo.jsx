@@ -11,12 +11,13 @@ const Todo = () => {
 
   // 할 일 추가하는 함수
   const addTodo = (task) => {
-    setTodos([...todos, {
+    const newTodo = {
       id: todos.length + 1,
       isDone: false,
       task: task,
       createDate: new Date().toLocaleDateString()
-    }])
+    }
+    setTodos([newTodo, ...todos])
   }
 
   return (
