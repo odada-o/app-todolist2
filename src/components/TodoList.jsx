@@ -5,7 +5,6 @@ import { set } from 'date-fns'
 const TodoList = ({ mockTodoData, onUpdate, onDelete }) => {
 
   const [search, setSearch] = useState('')
-
   const filteredTodos = () => {
     return mockTodoData.filter(
       (item) => item.task.toLowerCase().includes(search.toLowerCase())
@@ -28,7 +27,6 @@ const TodoList = ({ mockTodoData, onUpdate, onDelete }) => {
             <TodoItem key={item.id} {...item} onUpdate={onUpdate} onDelete={onDelete} />
           )
         )}
-          
         </ul>
       </div>
   )
