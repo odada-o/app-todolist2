@@ -21,13 +21,24 @@ const Todo = () => {
   }
 
   // 완료 표시 함수
-  const onUpdate = () => {}
+  const onUpdate = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        return todo.id === id ? {...todo, isDone: !todo.isDone} : todo
+      })
+    )
+  }
+
+  // 할 일 삭제 함수
+  const onDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
 
   return (
-    <div className='flex flex-col gap-4 p-8'>
+    <div className='flex flex-col gap-4 p-8 pb-40'>
       <TodoHd />
       <TodoEditor addTodo={addTodo} />
-      <TodoList mockTodoData={todos} onUpdate={onUpdate} />
+      <TodoList mockTodoData={todos} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   )
 }

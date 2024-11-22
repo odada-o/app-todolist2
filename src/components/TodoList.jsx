@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TodoItem from './TodoItem'
 import { set } from 'date-fns'
 
-const TodoList = ({ mockTodoData, onUpdate }) => {
+const TodoList = ({ mockTodoData, onUpdate, onDelete }) => {
 
   const [search, setSearch] = useState('')
 
@@ -22,10 +22,10 @@ const TodoList = ({ mockTodoData, onUpdate }) => {
           placeholder='검색어를 입력하세요.'
           className='p-3 text-black w-full'
          />
-        <ul>
+        <ul className='mt-5 flex flex-col gap-2 divide-y'>
           {filteredTodos().map((item) => (
             console.log(item),
-            <TodoItem key={item.id} {...item} onUpdate={onUpdate} />
+            <TodoItem key={item.id} {...item} onUpdate={onUpdate} onDelete={onDelete} />
           )
         )}
           
