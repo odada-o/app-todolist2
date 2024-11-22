@@ -1,7 +1,8 @@
 "use client"
 
-import classNames from 'classnames'
-import React, { useRef, useState } from 'react'
+import classNames from 'classnames';
+import React, { useRef, useState } from 'react';
+import { IoCloseCircle } from "react-icons/io5";
 
 const TodoEditor = ({addTodo}) => {
   const [task, setTask] = useState("")
@@ -28,21 +29,43 @@ const TodoEditor = ({addTodo}) => {
       }
   }
 
+  const onCloseKey = () => {
+    setTask("");
+    inputRef.current.focus();
+  }
+
   return (
     <div>
         <h2>새로운 Todo 작성하기</h2>
         <div>
-          {/* <form> */}
-            <input type="text" value={task} ref={inputRef} 
-              onKeyDown={onKeyDown} onChange={onChangeTask} placeholder="할 일을 입력하세요." className='p-3 text-black' />
+          <form className='flex'>
+            <div className='relative flex-1'>
+              <input 
+                type="text" 
+                value={task} 
+                ref={inputRef} 
+                onKeyDown={onKeyDown} 
+                onChange={onChangeTask} 
+                placeholder="할 일을 입력하세요." 
+                className='p-3 text-black w-full' 
+              />
+              <button 
+                disabled={!task} 
+                onClick={onCloseKey}
+                className={
+                  classNames('absolute top-1 right-1 w-10 h-10  flex justify-center items-center', task ? 'text-black' : 'text-gray')
+                  }>
+                <IoCloseCircle />
+              </button>
+            </div>
             <button 
-              // type='submit'
+              type='submit'
               onClick={onSubmit} 
               disabled={!task} 
               className={
-              classNames('p-3', task ? 'bg-blue-300' : 'bg-gray-300')
+                classNames('p-3', task ? 'bg-blue-300' : 'bg-gray-300')
               }>할 일 추가</button>
-          {/* </form> */}
+          </form>
         </div>
       </div>
   )
