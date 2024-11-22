@@ -20,20 +20,29 @@ const TodoEditor = ({addTodo}) => {
     inputRef.current.focus();
   }
 
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") onSubmit()
+    if (e.key === "Escape") {
+        setTask("");
+        inputRef.current.focus();
+      }
+  }
+
   return (
     <div>
         <h2>새로운 Todo 작성하기</h2>
         <div>
-          <form>
-            <input type="text" value={task} ref={inputRef} onChange={onChangeTask} placeholder="할 일을 입력하세요." className='p-3 text-black' />
+          {/* <form> */}
+            <input type="text" value={task} ref={inputRef} 
+              onKeyDown={onKeyDown} onChange={onChangeTask} placeholder="할 일을 입력하세요." className='p-3 text-black' />
             <button 
-              type='submit'
+              // type='submit'
               onClick={onSubmit} 
               disabled={!task} 
               className={
               classNames('p-3', task ? 'bg-blue-300' : 'bg-gray-300')
               }>할 일 추가</button>
-          </form>
+          {/* </form> */}
         </div>
       </div>
   )
