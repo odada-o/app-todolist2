@@ -11,7 +11,7 @@ const Todo = () => {
   const [todos, dispatch] = useReducer(setTodos, [])
 
   const onDelete = (id) => {
-    dispatch({type: 'DELETE_TODO', payload: id})
+    dispatch({type: 'DELETE_TODO', payload: {id}})
   }
 
   useEffect(() => {
