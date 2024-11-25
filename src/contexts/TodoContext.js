@@ -1,7 +1,7 @@
 "use client";
 
 import { ADD_TODO, DELETE_TODO, setTodos, UPDATE_TODO } from "@/states/todoReducer";
-import { useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 // 생성
 const TodoContext = createContext();
@@ -9,6 +9,8 @@ const TodoContext = createContext();
 // 공급
 export const TodoProvider = ({children}) => {
   const [todos, dispatch] = useReducer(setTodos, [])
+  // 로컬 스토리지 키 선언
+  const LOCAL_STORAGE_KEY = "my-todo-app-todos";
 
   useEffect(() => {
       const savedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
@@ -34,8 +36,16 @@ export const TodoProvider = ({children}) => {
   const onDelete = (id) => {
     dispatch({type: DELETE_TODO, payload: {id}})
   }
+
+  const value = {
+    todos,
+    addTodo,
+    onUpdate,
+    onDelete
+  }
+
   return (
-    <TodoContext.Provider value={}>
+    <TodoContext.Provider value={value}>
       {children}
     </TodoContext.Provider>
   )

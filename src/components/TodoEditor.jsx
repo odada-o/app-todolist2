@@ -4,11 +4,13 @@ import classNames from 'classnames';
 import React, { useContext, useRef, useState } from 'react';
 import { IoCloseCircle } from "react-icons/io5";
 import { ThemeContext } from '@/app/layout';
+import { useTodo } from '@/contexts/TodoContext';
 
-const TodoEditor = ({addTodo}) => {
-  const [task, setTask] = useState("")
-  const inputRef = useRef()
-  const theme = useContext(ThemeContext)
+const TodoEditor = () => {
+  const [task, setTask] = useState("");
+  const inputRef = useRef();
+  const theme = useContext(ThemeContext);
+  const {addTodo} = useTodo();
 
   const onChangeTask = (e) => {setTask(e.target.value)}
   const onSubmit = () => {
