@@ -4,11 +4,27 @@ import React, { useEffect, useReducer, useState } from 'react'
 import TodoHd from './TodoHd'
 import TodoEditor from './TodoEditor'
 import TodoList from './TodoList'
-import { ADD_TODO, setTodos } from '@/states/todoReducer'
+import { ADD_TODO, DELETE_TODO, setTodos, UPDATE_TODO } from '@/states/todoReducer'
+
+// 로컬 스토리지 키 선언
+const LOCAL_STORAGE_KEY = "my-todo-app-todos";
 
 const Todo = () => {
   // const [todos, setTodos] = useState([]);
   const [todos, dispatch] = useReducer(setTodos, [])
+
+  useEffect(() => {
+      const savedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+      // setTodos(savedTodos);
+      savedTodos.forEach((todo) => {return dispatch({
+        type: ADD_TODO,
+        payload: todo
+      })})
+  }, [])
+
+  useEffect(() => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos])
   
   const addTodo = (task) => {
     dispatch({type: ADD_TODO, payload: {task}})
@@ -21,15 +37,6 @@ const Todo = () => {
   const onDelete = (id) => {
     dispatch({type: DELETE_TODO, payload: {id}})
   }
-
-  useEffect(() => {
-      const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
-      setTodos(savedTodos);
-  }, [])
-
-  useEffect(() => {
-      localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos])
 
 
   return (
