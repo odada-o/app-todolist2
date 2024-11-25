@@ -3,12 +3,16 @@
 import { createContext, useContext } from "react";
 import "./globals.css";
 import classNames from "classnames";
+import { TodoProvider } from "@/contexts/TodoContext";
 
 const themes = {
   light: {
     background: "bg-white",
     text: "text-black",
     btn: 'bg-gray-800',
+    input: 'bg-gray-800',
+    white: 'white',
+    black: 'gray-800',
   },
   dark: {
     background: "bg-gray-800",
@@ -34,12 +38,14 @@ const ToggleButton = () => {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <ThemeContext.Provider value={themes.dark}>
-        <body>
-          <ToggleButton />
-          {children}
-        </body>
-      </ThemeContext.Provider>
+      <TodoProvider>
+        <ThemeContext.Provider value={themes.light}>
+          <body>
+            <ToggleButton />
+            {children}
+          </body>
+        </ThemeContext.Provider>
+      </TodoProvider>
     </html>
   );
 }

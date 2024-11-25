@@ -11,32 +11,7 @@ const LOCAL_STORAGE_KEY = "my-todo-app-todos";
 
 const Todo = () => {
   // const [todos, setTodos] = useState([]);
-  const [todos, dispatch] = useReducer(setTodos, [])
-
-  useEffect(() => {
-      const savedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
-      // setTodos(savedTodos);
-      savedTodos.forEach((todo) => {return dispatch({
-        type: ADD_TODO,
-        payload: todo
-      })})
-  }, [])
-
-  useEffect(() => {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
-  }, [todos])
   
-  const addTodo = (task) => {
-    dispatch({type: ADD_TODO, payload: {task}})
-  }
-
-  const onUpdate = (id) => {
-    dispatch({type: UPDATE_TODO, payload: {id}})
-  }
-
-  const onDelete = (id) => {
-    dispatch({type: DELETE_TODO, payload: {id}})
-  }
 
 
   return (
