@@ -1,24 +1,25 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import TodoHd from './TodoHd'
 import TodoEditor from './TodoEditor'
 import TodoList from './TodoList'
+import { setTodos } from '@/states/todoReducer'
 
 const Todo = () => {
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
+  const [todos, dispatch] = useReducer(setTodos, [])
+
+  const onDelete = (id) => {
+    dispatch({type: 'DELETE_TODO', payload: id})
+  }
 
   useEffect(() => {
-      // localStorage에서 'todos' 키로 저장된 데이터를 가져옴
-      // JSON.parse() 함수를 이용하여 문자열을 객체로 변환
       const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
-      // 가져온 데이터로 상태 업데이트
       setTodos(savedTodos);
   }, [])
 
   useEffect(() => {
-      // todos 상태가 변경될 때마다 localStorage에 저장
-      // JSON.stringify() 함수를 이용하여 객체를 문자열로 변환
       localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos])
   
@@ -38,10 +39,6 @@ const Todo = () => {
         return todo.id === id ? {...todo, isDone: !todo.isDone} : todo
       })
     )
-  }
-
-  const onDelete = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id))
   }
 
   return (
