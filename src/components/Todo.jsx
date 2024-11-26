@@ -7,7 +7,7 @@ import TodoList from './TodoList'
 const Todo = () => {
   return (
     <div className='flex flex-col gap-4 p-8 pb-40'>
-      <TodoHd />
+      <TodoHd /> 
       <TodoEditor/>
       <TodoList/>
     </div>
